@@ -101,7 +101,7 @@ function draw() {
     if (start) 
         drawSprites(levels);
     
-    if(keyWentDown("1") ) {
+    if(keyWentDown("1")|| touchIsDown ) {
         lvl = 1;
         start = false;
         
@@ -153,7 +153,13 @@ function draw() {
             } else {
                 GRAVITY = 1;
             }
-
+            
+            if (touchIsDown && jumping ) {
+                touchStarted();  
+            } else {
+                GRAVITY = 1;
+            }
+            
             /****************Player*****************/
             if (player.overlap(spikes))
                 die();
@@ -220,6 +226,13 @@ function newGame() {
     bg_music.play();
     start = true;   
 }
+
+function touchStarted() {
+    if (touchIsDown && jumping ) {
+                GRAVITY = 0;  
+            }
+}
+
 /*
 function bg() {
     clouds = createSprite(width/2, height/2, 0, 0);
