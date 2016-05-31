@@ -1,0 +1,41 @@
+<!doctype html>
+<html> 
+    <head>
+        <!----support of foreigh character--->
+        <meta charset="utf-8">
+        <!--IE Compatibility setting. It ensures IE uses the latest rendering engine-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--get physical width of the mobile device-->
+        <meta name="viewport" content="width=device, initial-scale=1">
+        <title>Game</title>
+        <!--link the latest midified bootstrap stylesheet-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+        <!--link the latest midified jQuery framework, necessary for using Bootstrap's JS plugings-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous">
+        </script>
+        <!--link the latest midified bootstrap JS library-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+       
+    </head>
+    <body>
+        <div class="container">
+            <h1>MMP 210</h1>
+            <h3>Final Project</h3>  
+            <h4 class="lead text-center">Intructions:</h4>
+            <h4 class="text-center">Jump = Space Bar</h4>
+            <h4 class="text-center">Zero gravity = Z(hold) + Space Bar</h4>
+            <h4 class="text-center">Slow Descending = Space Bar + z(hold) when going down aster jumping.</h4>
+            <h6 class="text-center">If the player disappears just refresh the website(Still a work in progress).</h6>
+        </div>
+        <div id="myP5Container"></div>
+        
+        <script src="p5.min.js"></script>
+        <script src="p5.dom.min.js"></script>
+        <script src="p5.sound.js"></script>
+        <script src="p5.play.js" type="text/javascript"></script>
+        <script src="sketch.js"></script>        
+    </body>
+</html>
