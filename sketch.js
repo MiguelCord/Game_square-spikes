@@ -15,10 +15,11 @@ var ceiling_y = -10;
 var min_opening = 210;
 
 /********Action variables*******/
-var GRAVITY = 1;
+var GRAVITY = 0.5;
 var jump = 20;
 var speed = 10;
 var jumping = false;
+var touchIsDown = true;
 
 var lvl = 1;
 // 1 is purple, 2 is blue.
@@ -121,6 +122,13 @@ function draw() {
 
             /**************JUMP*******************/
             if (keyDown("space") && !jumping) {
+                player.velocity.y = -jump;
+                jumping = true; 
+                mySound.setVolume(0.1);
+                mySound.play();
+            } 
+            
+            if (touchIsDown && !jumping) {
                 player.velocity.y = -jump;
                 jumping = true; 
                 mySound.setVolume(0.1);
