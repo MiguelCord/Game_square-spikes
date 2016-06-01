@@ -15,10 +15,11 @@ var ceiling_y = -10;
 var min_opening = 210;
 
 /********Action variables*******/
-var GRAVITY = 1;
+var GRAVITY = 0.5;
 var jump = 20;
 var speed = 10;
 var jumping = false;
+var touchIsDown;
 
 var lvl = 1;
 // 1 is purple, 2 is blue.
@@ -100,7 +101,7 @@ function draw() {
     if (start) 
         drawSprites(levels);
     
-    if(keyWentDown("1") ) {
+    if(keyWentDown("1")|| touchIsDown ) {
         lvl = 1;
         start = false;
         
@@ -126,6 +127,13 @@ function draw() {
                 mySound.setVolume(0.1);
                 mySound.play();
             } 
+            
+            if (touchIsDown && !jumping) {
+                player.velocity.y = -jump;
+                jumping = true; 
+                mySound.setVolume(0.1);
+                mySound.play();
+            } 
 
             player.velocity.y += GRAVITY;
             if (player.collide(ground) ) {
@@ -145,7 +153,13 @@ function draw() {
             } else {
                 GRAVITY = 1;
             }
-
+            
+            if (touchIsDown && jumping ) {
+                touchStarted();  
+            } else {
+                GRAVITY = 1;
+            }
+            
             /****************Player*****************/
             if (player.overlap(spikes))
                 die();
@@ -212,12 +226,18 @@ function newGame() {
     bg_music.play();
     start = true;   
 }
+
+function touchStarted() {
+    if (touchIsDown && jumping ) {
+                GRAVITY = 0;  
+            }
+}
+
 /*
 function bg() {
     clouds = createSprite(width/2, height/2, 0, 0);
     clouds.addImage(img);
 }
-
 /*
 function bg() {
     var size = 40;
@@ -230,5 +250,3 @@ function bg() {
             }
 }
 */
-
-
