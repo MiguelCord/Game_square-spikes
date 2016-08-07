@@ -1,7 +1,7 @@
 //var background;
 var player;
 var ground;
-var ceiling
+var ceiling;
 var spikes;
 var levels;
 //var clouds;
@@ -21,8 +21,8 @@ var speed = 10;
 var jumping = false;
 var touchIsDown;
 
-var lvl = 1;
-// 1 is purple, 2 is blue.
+var lvl;
+// 1 is purple, 2 is blue, 3 is square.
 
 function preload() {
     /************IMAGES************/
@@ -121,20 +121,20 @@ function draw() {
         if (!gameOver) {
 
             /**************JUMP*******************/
-            if (keyDown("space") && !jumping) {
+            if (!jumping && (keyDown("space") || touchIsDown)) {
                 player.velocity.y = -jump;
                 jumping = true; 
                 mySound.setVolume(0.1);
                 mySound.play();
             } 
-            
+            /*
             if (touchIsDown && !jumping) {
                 player.velocity.y = -jump;
                 jumping = true; 
                 mySound.setVolume(0.1);
                 mySound.play();
             } 
-
+            */
             player.velocity.y += GRAVITY;
             if (player.collide(ground) ) {
                 player.velocity.y = 0;
@@ -148,17 +148,18 @@ function draw() {
 
             }
 
-            if (keyDown("z") && jumping ) {
+            if (jumping && (keyDown("z") || touchIsDown)) {
                 GRAVITY = 0;  
             } else {
                 GRAVITY = 1;
             }
-            
+            /*
             if (touchIsDown && jumping ) {
                 touchStarted();  
             } else {
                 GRAVITY = 1;
             }
+            */
             
             /****************Player*****************/
             if (player.overlap(spikes))
@@ -211,28 +212,30 @@ function draw() {
 
 function die() {
     updateSprites(false);
+    //player.remove();
     gameOver = true;
     game_over.play();
     bg_music.stop();
-   
 }
 
 function newGame() {
     spikes.removeSprites();
     //player.removeSprites();
+    //player.update();
+   /* player.position.x = 100;
+    player.position.y = height -41;*/
     gameOver = false;
     updateSprites(true);
-    player.update();
-    bg_music.play();
     start = true;   
+    bg_music.play();
 }
-
+/*
 function touchStarted() {
     if (touchIsDown && jumping ) {
-                GRAVITY = 0;  
-            }
+        GRAVITY = 0;  
+    }
 }
-
+*/
 /*
 function bg() {
     clouds = createSprite(width/2, height/2, 0, 0);
