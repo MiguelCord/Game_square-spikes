@@ -26,51 +26,51 @@ var lvl = 1;
 
 function preload() {
     /************IMAGES************/
-    spikesImg = loadImage("images/spikes_2.png"); 
+    spikesImg = loadImage("images/spikes_2.png");
     spikesImgBlue = loadImage("images/spikes_blue.png");
     levelsImg = loadImage("images/level.png");
-    
+
     /************SOUND************/
-    mySound = loadSound ("assets/jump.wav");
-    game_over = loadSound ("assets/game_over.wav");
-    bg_music = loadSound ("assets/bg_music.mp3");
+    // mySound = loadSound ("assets/jump.wav");
+    // game_over = loadSound ("assets/game_over.wav");
+    // bg_music = loadSound ("assets/bg_music.mp3");
 }
 
 function setup() {
     var myCanvas = createCanvas(960, 420);
     myCanvas.parent("myP5Container");
     myCanvas.style("position", "relative");
-        
+
     /********SOUND*********/
-    bg_music.play();
-    
+    // bg_music.play();
+
     /********LEVELS*******/
     levels = new Group();
-    
+
     var level = createSprite(width/2, height/2, 0, 0);
     level.addImage(levelsImg);
     levels.add(level);
-    
+
     /*******BACKGROUND******/
     /*var img = loadImage("images/clouds.png");
     clouds = createSprite(width/2, height/2, 0, 0);
     clouds.addImage(img);*/
-    
+
     /********CEILING******/
     ceiling = createSprite(0, ceiling_y, width * 4, height/5);
     ceiling.shapeColor = color(229, 203, 179);
-    
+
     /********GROUND*******/
     ground = createSprite(0, ground_Y, width * 4, height/4);
     ground.shapeColor = color(229, 203, 179);
-    
+
     /********PLAYER*******/
     player = createSprite(100, height - 41, 80, 80);
     player.shapeColor = color(255, 77, 77);
     //player.debug = true;
-    
+
     /********SPIKES*******/
-    spikes = new Group();    
+    spikes = new Group();
 }
 /*
 function windowResized() {
@@ -82,7 +82,7 @@ function draw() {
 /*  var cloud = createSprite(width/2, height/2, 0, 0);
     cloud.addImage(cloudsImg);
     clouds.add(cloud);
-    
+
    /*
         fill("black");
         textSize(50);
@@ -93,47 +93,47 @@ function draw() {
         text("Medium --- 2", 0, 200, width, 50);
         text("Hard ----- 1", 0, 250, width, 50);
     */
-        
-    if (gameOver && keyWentDown("y") ){ 
-        newGame();  
+
+    if (gameOver && keyWentDown("y") ){
+        newGame();
     }
-    
-    if (start) 
+
+    if (start)
         drawSprites(levels);
-    
+
     if(keyWentDown("1")|| touchIsDown ) {
         lvl = 1;
         start = false;
-        
-    } 
+
+    }
     else if(keyWentDown("2") ) {
         lvl = 2;
         start = false;
-    } 
+    }
     else if(keyWentDown("3") ) {
         lvl = 3;
         start = false;
-    } 
-    
+    }
+
     console.log(start, gameOver);
-    
-    if (!start) { 
+
+    if (!start) {
         if (!gameOver) {
 
             /**************JUMP*******************/
             if (keyDown("space") && !jumping) {
                 player.velocity.y = -jump;
-                jumping = true; 
-                mySound.setVolume(0.1);
-                mySound.play();
-            } 
-            
+                jumping = true;
+                // mySound.setVolume(0.1);
+                // mySound.play();
+            }
+
             if (touchIsDown && !jumping) {
                 player.velocity.y = -jump;
-                jumping = true; 
-                mySound.setVolume(0.1);
-                mySound.play();
-            } 
+                jumping = true;
+                // mySound.setVolume(0.1);
+                // mySound.play();
+            }
 
             player.velocity.y += GRAVITY;
             if (player.collide(ground) ) {
@@ -144,27 +144,27 @@ function draw() {
             if (player.collide(ceiling) ) {
                 player.velocity.y = 0;
                 if (jumping) jumping = false;
-                mySound.pause();
+                // 1mySound.pause();
 
             }
 
             if (keyDown("z") && jumping ) {
-                GRAVITY = 0;  
+                GRAVITY = 0;
             } else {
                 GRAVITY = 1;
             }
-            
+
             if (touchIsDown && jumping ) {
-                touchStarted();  
+                touchStarted();
             } else {
                 GRAVITY = 1;
             }
-            
+
             /****************Player*****************/
             if (player.overlap(spikes))
                 die();
 
-            /****************Spawn spikes*****************/        
+            /****************Spawn spikes*****************/
             if (frameCount%50 == 0) {           //Floor Spikes
                 var spikeH = random(50, 300);
                 var spike = createSprite(player.position.x + 800 + spikeH, height - 75, 80, 80);
@@ -190,7 +190,7 @@ function draw() {
                 spike.debug = true;
             }
 
-            drawSprite(player); 
+            drawSprite(player);
             drawSprite(ground);
             drawSprite(ceiling);
             drawSprites(spikes);
@@ -205,16 +205,16 @@ function draw() {
             textSize(25);
             text("Would you like to play again?", 0, 180, width, 50);
             text("Y/N", width/2, 240);
-        }  
+        }
     }
 }
 
 function die() {
     updateSprites(false);
     gameOver = true;
-    game_over.play();
-    bg_music.stop();
-   
+    // game_over.play();
+    // bg_music.stop();
+
 }
 
 function newGame() {
@@ -223,13 +223,13 @@ function newGame() {
     gameOver = false;
     updateSprites(true);
     player.update();
-    bg_music.play();
-    start = true;   
+    // bg_music.play();
+    start = true;
 }
 
 function touchStarted() {
     if (touchIsDown && jumping ) {
-                GRAVITY = 0;  
+                GRAVITY = 0;
             }
 }
 
